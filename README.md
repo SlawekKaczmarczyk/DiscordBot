@@ -2,4 +2,9 @@
 
 I created a Discord Bot to make my life easier and provide entertainment(like memes).
 
-Next step is to give it fuctionality to send pictures with text and then I am going to think about what next :)
+!help to see commands
+
+Make sure run these commands before using the bot:
+pip install discord.py
+pip install requests
+pip install aiohttp
