@@ -61,6 +61,25 @@ def run_dicord_bot():
                 embed.set_image(url=res['data']['children'] [random.randint(0, 25)]['data']['url'])
                 await ctx.send(embed=embed)
 
+    @bot.command(name='ban', help='Banning users from channel.')
+    async def ban(ctx, member: discord.Member, *, reason=None):
+        await member.ban(reason=reason)
+        await ctx.send(f'member.mention was banned! Reason: {reason}')
+
+
+    @bot.command(name='unban', help='Unbanning users from channel.')
+    async def unban(ctx, *, member):
+        banned_users = await ctx.guild.bans()
+        member_name, member_discriminator = member.split('#')
+
+        for ban_entry in banned_users:
+            user = ban_entry.user
+
+            if(user.name, user.discriminator) ==(member_name, member_discriminator):
+                await ctx.guild.unban(user)
+                await ctx.send(f'{user.mention} was unbanned!')
+                return
+
     @bot.event
     async def on_command_error(ctx, error):
         if isinstance(error, commands.errors.CheckFailure):
